@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "mouse_driver.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -98,7 +99,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
-  unsigned char uart_message[] = "Hello, world!\r\n";
+  //unsigned char uart_message[] = "Hello, world!\r\n";
 
   /* USER CODE END 2 */
 
@@ -106,7 +107,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_UART_Transmit(&huart2, (uint8_t*) uart_message, sizeof(uart_message) - 1, 100);
+	  //HAL_UART_Transmit(&huart2, (uint8_t*) uart_message, sizeof(uart_message) - 1, 100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -260,6 +261,7 @@ static void MX_USB_OTG_FS_PCD_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USB_OTG_FS_Init 2 */
+  USB_Start(&hpcd_USB_OTG_FS);
 
   /* USER CODE END USB_OTG_FS_Init 2 */
 

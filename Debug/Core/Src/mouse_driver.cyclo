@@ -1,0 +1,2 @@
+../Core/Src/mouse_driver.c:14:19:USB_Start	1
+../Core/Src/mouse_driver.c:20:6:HAL_PCD_SetupStageCallback	3

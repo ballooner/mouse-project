@@ -8,29 +8,20 @@
 #ifndef INC_MOUSE_DRIVER_H_
 #define INC_MOUSE_DRIVER_H_
 
-#include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal.h"
 #include <stddef.h>
 
 /* Setup packet bRequest defines */
-#define BREQUEST_GET_STATUS			(0x00)
-#define BREQUEST_CLEAR_FEATURE		(0x01)
-#define BREQUEST_SET_FEATURE		(0x03)
-#define BREQUEST_SET_ADDRESS		(0x05)
-#define BREQUEST_GET_DESCRIPTOR		(0x06)
-#define BREQUEST_SET_DESCRIPTOR		(0x07)
-#define BREQUEST_GET_CONFIGURATION	(0x08)
-#define BREQUEST_SET_CONFIGURATION	(0x09)
+#define BREQUEST_GET_STATUS			((uint8_t)0x00)
+#define BREQUEST_CLEAR_FEATURE		((uint8_t)0x01)
+#define BREQUEST_SET_FEATURE		((uint8_t)0x03)
+#define BREQUEST_SET_ADDRESS		((uint8_t)0x05)
+#define BREQUEST_GET_DESCRIPTOR		((uint8_t)0x06)
+#define BREQUEST_SET_DESCRIPTOR		((uint8_t)0x07)
+#define BREQUEST_GET_CONFIGURATION	((uint8_t)0x08)
+#define BREQUEST_SET_CONFIGURATION	((uint8_t)0x09)
 
-typedef struct
-{
-	uint8_t		bmRequestType;
-	uint8_t		bRequest;
-	uint16_t	wValue;
-	uint16_t	wIndex;
-	uint16_t	wLength;
-} usb_setup_packet_t;
-
-HAL_StatusTypeDef USB_Setup();
+HAL_StatusTypeDef USB_Start(PCD_HandleTypeDef *hpcd_USB);
 
 /* HAL_PCD callbacks */
 void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd);
