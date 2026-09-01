@@ -1,2 +1,2 @@
-../Core/Src/mouse_driver.c:14:19:USB_Start	16	static
-../Core/Src/mouse_driver.c:20:6:HAL_PCD_SetupStageCallback	56	static
+../Core/Src/mouse_driver.c:76:19:USB_Start	16	static
+../Core/Src/mouse_driver.c:82:6:HAL_PCD_SetupStageCallback	32	static

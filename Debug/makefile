@@ -60,8 +60,8 @@ all: main-build
 main-build: mouse-project.elf secondary-outputs
 
 # Tool invocations
-mouse-project.elf mouse-project.map: $(OBJS) $(USER_OBJS) Z:\Github\mouse-project\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "mouse-project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"Z:\Github\mouse-project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mouse-project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+mouse-project.elf mouse-project.map: $(OBJS) $(USER_OBJS) C:\Users\jaced\Documents\Github\mouse-project\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "mouse-project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\jaced\Documents\Github\mouse-project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mouse-project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
