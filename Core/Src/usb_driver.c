@@ -5,6 +5,7 @@
  *      Author: jaced
  */
 
+USB_SetupPacket			setup_packet;
 
 static const uint8_t	device_descriptor[] =
 {
@@ -68,25 +69,41 @@ static const uint8_t	config_descriptor[] =
 
 uint8_t device_address = 0;
 
-HAL_StatusTypeDef USB_Start(PCD_HandleTypeDef *hpcd_USB) {
+HAL_StatusTypeDef USB_Start(PCD_HandleTypeDef *hpcd_USB)
+{
 	HAL_PCD_Start(hpcd_USB);
 
 	return HAL_OK;
 }
 
-void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd) {
-	uint8_t *setup = (uint8_t*) hpcd->Setup;
+void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
+{
+	uint8_t *setup 				= (uint8_t*) hpcd->Setup;
 
-	uint8_t bmRequestType = setup[0];
-	uint8_t bRequest = setup[1];
-	uint16_t wValue = setup[2] | ((uint16_t) setup[3] << 8);
-	uint16_t wIndex = setup[4] | ((uint16_t) setup[5] << 8);
-	uint16_t wLength = setup[6] | ((uint16_t) setup[7] << 8);
+	setup_packet->bmRequestType = setup[0];
+	setup_packet->bRequest 		= setup[1];
+	setup_packet->wValue 		= setup[2] | ((uint16_t)setup[3] << 8);
+	setup_packet->wIndex 		= setup[4] | ((uint16_t) setup[5] << 8);
+	setup_packet->wLength		= setup[6] | ((uint16_t) setup[7] << 8);
 
+	switch(bmRequestType & TYPE_MASK)
+	{
+	case TYPE_STANDARD:
+		USB_StandardRequestHandler(hpcd);
+		break;
+	case TYPE_CLASS:
+		break;
+	case TYPE_VENDOR:
+		break;
+	default:
 
+	}
 }
 
 void USB_StandardRequestHandler(PCD_HandleTypeDef *hpcd)
 {
+	uint16_t len  = 0U;
+	uint8_t *pbuf = NULL;
+
 
 }

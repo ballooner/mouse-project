@@ -32,6 +32,15 @@
 #define BREQUEST_GET_CONFIGURATION	((uint8_t)0x08)
 #define BREQUEST_SET_CONFIGURATION	((uint8_t)0x09)
 
+typedef struct
+{
+	uint8_t		bmRequestType;
+	uint8_t		bRequest;
+	uint16_t	wValue;
+	uint16_t	wIndex;
+	uint16_t	wLength;
+} USB_SetupPacket;
+
 HAL_StatusTypeDef USB_Start(PCD_HandleTypeDef *hpcd_USB);
 
 /* HAL_PCD callbacks */
