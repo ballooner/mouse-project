@@ -82,4 +82,11 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd) {
 	uint16_t wValue = setup[2] | ((uint16_t) setup[3] << 8);
 	uint16_t wIndex = setup[4] | ((uint16_t) setup[5] << 8);
 	uint16_t wLength = setup[6] | ((uint16_t) setup[7] << 8);
+
+
+}
+
+void USB_StandardRequestHandler(PCD_HandleTypeDef *hpcd)
+{
+
 }
