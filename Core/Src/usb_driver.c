@@ -30,7 +30,7 @@ static const uint8_t	config_descriptor[] =
 		/* CONFIG DESCRIPTOR */
 		0x09,			//bLength
 		0x02,			//bDescriptorType
-		0x19, 0x00,		//bTotalLength (return 34 bytes of data)
+		0x19, 0x00,		//bTotalLength
 		0x01,			//bNumInterfaces
 		0x01,			//bConfigurationValue
 		0x00,			//iConfiguration
@@ -124,14 +124,17 @@ void USB_StandardRequestHandler(PCD_HandleTypeDef *hpcd)
 
 void USB_GetDeviceDescriptor(PCD_HandleTypeDef *hpcd)
 {
-	uint16_t len  = 0U;
-	uint8_t *pbuf = NULL;
+	uint16_t len  = MIN(sizeof(device_descriptor), setup_packet->wLength);
+	uint8_t *pbuf = &device_descriptor;
 
+	HAL_PCD_EP_Transmit(hpcd, 0, pbuf, len);
 }
 
 
 void USB_GetConfigDescriptor(PCD_HandleTypeDef *hpcd)
 {
-	uint16_t len  = 0U;
-	uint8_t *pbuf = NULL;
+	uint16_t len  = MIN(sizeof(device_descriptor), setup_packet->wLength);
+	uint8_t *pbuf = &config_descriptor;
+
+	HAL_PCD_EP_Transmit(hpcd, 0, pbuf, len);
 }
