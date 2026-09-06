@@ -82,7 +82,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
 
 	setup_packet->bmRequestType = setup[0];
 	setup_packet->bRequest 		= setup[1];
-	setup_packet->wValue 		= setup[2] | ((uint16_t)setup[3] << 8);
+	setup_packet->wValue 		= setup[2] | ((uint16_t) setup[3] << 8);
 	setup_packet->wIndex 		= setup[4] | ((uint16_t) setup[5] << 8);
 	setup_packet->wLength		= setup[6] | ((uint16_t) setup[7] << 8);
 
@@ -102,8 +102,36 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
 
 void USB_StandardRequestHandler(PCD_HandleTypeDef *hpcd)
 {
+	switch(setup_packet->bRequest)
+	{
+	case BREQUEST_SET_ADDRESS:
+		break;
+	case BREQUEST_GET_DESCRIPTOR:
+		switch(wValue)
+		{
+		case WVAL_DEVICE_DESCRIPTOR:
+			USB_GetDeviceDescriptor(hpcd);
+			break;
+		case WVAL_CONFIG_DESCRIPTOR:
+			USB_GetConfigDescriptor(hpcd);
+			break;
+		}
+		break;
+	case BREQUEST_SET_CONFIGURATION:
+		break;
+	}
+}
+
+void USB_GetDeviceDescriptor(PCD_HandleTypeDef *hpcd)
+{
 	uint16_t len  = 0U;
 	uint8_t *pbuf = NULL;
 
+}
 
+
+void USB_GetConfigDescriptor(PCD_HandleTypeDef *hpcd)
+{
+	uint16_t len  = 0U;
+	uint8_t *pbuf = NULL;
 }

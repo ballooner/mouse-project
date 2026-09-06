@@ -32,6 +32,10 @@
 #define BREQUEST_GET_CONFIGURATION	((uint8_t)0x08)
 #define BREQUEST_SET_CONFIGURATION	((uint8_t)0x09)
 
+/* wValue descriptor types*/
+#define WVAL_DEVICE_DESCRIPTOR		((uint16_t)0x10)
+#define WVAL_CONFIG_DESCRIPTOR		((uint16_t)0x20)
+
 typedef struct
 {
 	uint8_t		bmRequestType;
@@ -48,5 +52,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd);
 
 /* USB Standard Request handlers */
 void USB_StandardRequestHandler(PCD_HandleTypeDef *hpcd);
+void USB_GetDeviceDescriptor(PCD_HandleTypeDef *hpcd);
+void USB_GetConfigDescriptor(PCD_HandleTypeDef *hpcd);
 
 #endif /* INC_USB_DRIVER_H_ */
